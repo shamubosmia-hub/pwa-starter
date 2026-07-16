@@ -3,11 +3,11 @@ import { customElement } from 'lit/decorators.js';
 
 // You can also import styles from another file
 // if you prefer to keep your CSS seperate from your component
-import { styles } from './about-styles';
+import { styles } from './app-about.styles';
 
-import { styles as sharedStyles } from '../../styles/shared-styles'
+import { styles as sharedStyles } from '../../shared.styles'
 
-import '@shoelace-style/shoelace/dist/components/card/card.js';
+import '@awesome.me/webawesome/dist/components/card/card.js';
 
 @customElement('app-about')
 export class AppAbout extends LitElement {
@@ -23,7 +23,7 @@ export class AppAbout extends LitElement {
       <main>
         <h2>About Page</h2>
 
-        <sl-card>
+        <wa-card>
           <h2>Did you know?</h2>
 
           <p>PWAs have access to many useful APIs in modern browsers! These
@@ -34,7 +34,7 @@ export class AppAbout extends LitElement {
           <p>Check out <a
               href="https://docs.microsoft.com/en-us/microsoft-edge/progressive-web-apps-chromium/how-to/handle-files">these
               docs</a> to learn more about the advanced features that you can use in your PWA</p>
-        </sl-card>
+        </wa-card>
       </main>
     `;
   }

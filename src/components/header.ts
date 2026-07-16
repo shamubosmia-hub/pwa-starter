@@ -1,8 +1,8 @@
-import { LitElement, css, html } from 'lit';
+import { LitElement, css, html, nothing } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
 import { resolveRouterPath } from '../router';
 
-import '@shoelace-style/shoelace/dist/components/button/button.js';
+import '@awesome.me/webawesome/dist/components/button/button.js';
 @customElement('app-header')
 export class AppHeader extends LitElement {
   @property({ type: String }) title = 'PWA Starter';
@@ -14,15 +14,15 @@ export class AppHeader extends LitElement {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      box-sizing: border-box;
       background: var(--app-color-primary);
-      color: white;
-      padding: 12px;
-      padding-top: 4px;
+      color: var(--app-color-on-primary);
+      padding: 0 16px;
 
       position: fixed;
       left: env(titlebar-area-x, 0);
       top: env(titlebar-area-y, 0);
-      height: env(titlebar-area-height, 30px);
+      height: env(titlebar-area-height, 56px);
       width: env(titlebar-area-width, 100%);
       -webkit-app-region: drag;
     }
@@ -30,12 +30,32 @@ export class AppHeader extends LitElement {
     header h1 {
       margin-top: 0;
       margin-bottom: 0;
-      font-size: 12px;
+      font-size: 16px;
       font-weight: bold;
     }
 
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      -webkit-app-region: no-drag;
+    }
+
     nav a {
-      margin-left: 10px;
+      color: var(--app-color-on-primary);
+      text-decoration: none;
+      font-size: 15px;
+      opacity: 0.8;
+    }
+
+    nav a:hover {
+      opacity: 1;
+    }
+
+    nav a[aria-current='page'] {
+      opacity: 1;
+      font-weight: bold;
+      text-decoration: underline;
     }
 
     #back-button-block {
@@ -44,29 +64,35 @@ export class AppHeader extends LitElement {
       align-items: center;
       gap: 8px;
     }
-
-    @media(prefers-color-scheme: light) {
-      header {
-        color: black;
-      }
-
-      nav a {
-        color: initial;
-      }
-    }
   `;
 
   render() {
+    const homePath = resolveRouterPath();
+    const aboutPath = resolveRouterPath('about');
+    const current = window.location.pathname;
     return html`
       <header>
 
         <div id="back-button-block">
-          ${this.enableBack ? html`<sl-button size="small" href="${resolveRouterPath()}">
+          ${this.enableBack ? html`<wa-button size="s" href="${homePath}">
             Back
-          </sl-button>` : null}
+          </wa-button>` : null}
 
           <h1>${this.title}</h1>
         </div>
+
+        <nav>
+          <a
+            href="${homePath}"
+            aria-current="${current === homePath ? 'page' : nothing}"
+            >Home</a
+          >
+          <a
+            href="${aboutPath}"
+            aria-current="${current === aboutPath ? 'page' : nothing}"
+            >About</a
+          >
+        </nav>
       </header>
     `;
   }
