@@ -6,6 +6,7 @@
       "declaration": true,
       "emitDeclarationOnly": true,
       "skipLibCheck": true,
+      "rootDir": "./src",
       "outDir": "./types",
       "strict": true,
       "noUnusedLocals": true,
@@ -23,6 +24,6 @@
           "vite/client"
       ]
   },
-  "include": ["src/**/*.ts", "router.d.ts"],
+  "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]
 }
